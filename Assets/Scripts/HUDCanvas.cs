@@ -19,10 +19,17 @@ public class HUDCanvas : MonoBehaviour
     {
     }
 
-    private void AddHUDPanel(int row, int col)
+    public void AddHUDPanel(int row, int col)
     {
         // rows (0..2), cols (0..2): row * numCols + col
         panelTemp = Instantiate(panelPrefab, Vector3.zero, Quaternion.identity);
         panelTemp.transform.SetParent(hudZones[row * hudCols + col].transform);
+    }
+
+    public GameObject AddHUDPanel(GameObject childPanel, int row, int col)
+    {
+        panelTemp = Instantiate(childPanel, Vector3.zero, Quaternion.identity);
+        panelTemp.transform.SetParent(hudZones[row * hudCols + col].transform);
+        return panelTemp;
     }
 }

@@ -12,6 +12,7 @@ public class UIMGR : MonoSingleton<UIMGR>
 
     // hudCanvas
     private static HUDCanvas hudCanvas;
+    private static Score score;
 
     // titleCanvas
 
@@ -34,6 +35,10 @@ public class UIMGR : MonoSingleton<UIMGR>
     private void Awake()
     {
         hudCanvas = GameObject.Find("HUD Canvas").GetComponent<HUDCanvas>();
+        // score = GameObject.Find("UIMGR").GetComponent<Score>();
+        score = gameObject.GetComponentInChildren<Score>();
+        Control.OnGameStart += DrawUI;
+        //
         titleCanvas = GameObject.Find("Title Canvas").GetComponent<TitleCanvas>();
         versionPanel = GameObject.Find("VersionPanel").gameObject;
         versionText = GameObject.Find("VersionText").GetComponent<Text>();
@@ -54,6 +59,19 @@ public class UIMGR : MonoSingleton<UIMGR>
 
     public static void ShowTitle() {
         titleCanvas.ShowTitle();
+    }
+
+    public static void DrawUI() {
+        score.DisplayScore(); // TODO where/how
+        // DisplayScore(); // TODO where/how
+    }
+
+    // public static void DisplayScore() {
+    //     hudCanvas.AddHUDPanel(0, 1);
+    // }
+
+    public static GameObject Print(GameObject childPanel, int row, int col) { /*TODO nombre,funcionalidad*/
+        return hudCanvas.AddHUDPanel(childPanel, row, col);
     }
 
 }
